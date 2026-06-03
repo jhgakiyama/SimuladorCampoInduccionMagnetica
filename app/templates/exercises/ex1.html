@@ -1,0 +1,54 @@
+<article class="exercise" id="ejercicio-1">
+  <div class="exercise-head">
+    <div>
+      <span class="tag">Problema 1</span>
+      <h2>Campo magnetico de un conductor rectilineo infinito</h2>
+    </div>
+    <form class="panel" method="get">
+      <input type="hidden" name="view" value="ex1">
+      <label>Corriente I (A)<input name="ex1_current" type="number" step="any" value="{{ data.ex1.current }}"></label>
+      <label>Distancia r (cm)<input name="ex1_radius_cm" type="number" step="any" value="{{ data.ex1.radius_cm }}"></label>
+      <label>Campo objetivo B (T)<input name="ex1_target_field" type="number" step="any" value="{{ data.ex1.target_field }}"></label>
+      <button>Recalcular</button>
+    </form>
+  </div>
+
+  <p class="statement">
+    Calcular la magnitud del campo magnetico en un punto a 100 cm de un conductor
+    infinitamente largo y delgado que lleva una corriente de 1 A. Luego determinar
+    a que distancia el campo resultante vale 10^-4 T.
+  </p>
+
+  <div class="wiki-grid">
+    <section>
+      <h3>Conceptos</h3>
+      <p>
+        Para un conductor rectilineo largo se usa la ley de Ampere. Las lineas de
+        campo son circunferencias alrededor del cable, y la magnitud depende de I y r.
+      </p>
+    </section>
+    <section>
+      <h3>Formula</h3>
+      <p class="formula">B = mu0 I / (2 pi r)</p>
+      <p>Si se pide distancia: <span class="formula small">r = mu0 I / (2 pi B)</span></p>
+    </section>
+    <section>
+      <h3>Unidades</h3>
+      <p class="units">(T m / A) . A / m = T</p>
+      <p>Para despejar r: (T m / A) . A / T = m</p>
+    </section>
+    <section>
+      <h3>Sustitucion</h3>
+      <ol class="steps">
+        <li>Convertir distancia: {{ data.ex1.radius_cm }} cm / 100 = {{ data.ex1.radius_m }} m.</li>
+        <li>B = (4 pi x 10^-7 T m/A . {{ data.ex1.current }} A) / (2 pi . {{ data.ex1.radius_m }} m).</li>
+        <li>Se simplifican A con A y m con m; queda T.</li>
+      </ol>
+    </section>
+    <section class="result">
+      <h3>Resultado</h3>
+      <p>B = <strong>{{ "%.3e"|format(data.ex1.field.field_t) }} T</strong></p>
+      <p>r para B objetivo = <strong>{{ "%.4f"|format(data.ex1.distance.radius_m) }} m</strong> = <strong>{{ "%.2f"|format(data.ex1.distance.radius_cm) }} cm</strong></p>
+    </section>
+  </div>
+</article>

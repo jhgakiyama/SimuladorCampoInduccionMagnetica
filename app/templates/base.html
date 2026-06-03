@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fisica 2 | Campo magnetico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img src="{{ url_for('static', filename='LOGO.png') }}" alt="Universidad Tecnologica Nacional Facultad Regional Resistencia">
+      </div>
+    </header>
+
+    <section class="title-band">
+      <div>
+        <p>Fisica 2</p>
+        <h1>Guia Didactica: Campo Magnetico e Induccion</h1>
+      </div>
+    </section>
+
+    <section class="problem-band">
+      <details class="problem-menu">
+        <summary><span class="hamburger" aria-hidden="true"></span>Menu</summary>
+        <nav aria-label="Menu">
+          <a class="{{ 'active' if data.active_view == 'home' else '' }}" href="{{ url_for('index', view='home') }}">Home</a>
+          <a class="{{ 'active' if data.active_view == 'ex1' else '' }}" href="{{ url_for('index', view='ex1') }}">Ejercicio 1</a>
+          <a class="{{ 'active' if data.active_view == 'ex2' else '' }}" href="{{ url_for('index', view='ex2') }}">Ejercicio 2</a>
+          <a class="{{ 'active' if data.active_view == 'ex7' else '' }}" href="{{ url_for('index', view='ex7') }}">Ejercicio 7</a>
+        </nav>
+      </details>
+    </section>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if data.active_view == "home" %}
+    {% include "home.html" %}
+  {% elif data.active_view == "ex1" %}
+    {% include "exercises/ex1.html" %}
+  {% elif data.active_view == "ex2" %}
+    {% include "exercises/ex2.html" %}
+  {% elif data.active_view == "ex7" %}
+    {% include "exercises/ex7.html" %}
+  {% endif %}
+{% endblock %}
