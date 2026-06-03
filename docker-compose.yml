@@ -1,0 +1,9 @@
+services:
+  fisica2:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+    environment:
+      - FLASK_ENV=development
