@@ -15,6 +15,13 @@ Luego abrir:
 http://localhost:8000
 ```
 
+Rutas principales:
+
+- `/` para `Home`
+- `/ejercicio-1`
+- `/ejercicio-2`
+- `/ejercicio-7`
+
 ## Ejecutar tests dentro del contenedor
 
 ```powershell
@@ -25,8 +32,11 @@ docker compose run --rm fisica2 python -m unittest discover -s tests
 
 - `app/main.py`: rutas web y lectura de parametros editables.
 - `app/physics.py`: formulas fisicas reutilizables.
-- `app/templates/index.html`: pagina tipo wiki/ayuda.
+- `app/templates/base.html`: plantilla base comun.
+- `app/templates/home.html`: home con cards.
+- `app/templates/exercises/*.html`: templates independientes por ejercicio.
 - `app/static/styles.css`: estetica visual inspirada en UTN FRRE.
+- `tests/test_routes.py`: pruebas de rutas y render.
 - `tests/test_physics.py`: pruebas de las formulas principales.
 
 ## Ejercicios incluidos
