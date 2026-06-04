@@ -14,10 +14,10 @@
           <img src="{{ url_for('static', filename='LOGO.png') }}" alt="Universidad Tecnológica Nacional - Regional Resistencia">
         </div>
         <nav class="nav-links" aria-label="Navegación Principal">
-          <a class="{{ 'active' if data.active_view == 'home' else '' }}" href="{{ url_for('index', view='home') }}">Inicio</a>
-          <a class="{{ 'active' if data.active_view == 'ex1' else '' }}" href="{{ url_for('index', view='ex1') }}">Ejercicio 1</a>
-          <a class="{{ 'active' if data.active_view == 'ex2' else '' }}" href="{{ url_for('index', view='ex2') }}">Ejercicio 2</a>
-          <a class="{{ 'active' if data.active_view == 'ex7' else '' }}" href="{{ url_for('index', view='ex7') }}">Ejercicio 7</a>
+          <a class="{{ 'active' if data.active_view == 'home' else '' }}" href="{{ url_for('home') }}">Inicio</a>
+          <a class="{{ 'active' if data.active_view == 'ex1' else '' }}" href="{{ url_for('exercise1') }}">Ejercicio 1</a>
+          <a class="{{ 'active' if data.active_view == 'ex2' else '' }}" href="{{ url_for('exercise2') }}">Ejercicio 2</a>
+          <a class="{{ 'active' if data.active_view == 'ex7' else '' }}" href="{{ url_for('exercise7') }}">Ejercicio 7</a>
         </nav>
       </div>
     </header>

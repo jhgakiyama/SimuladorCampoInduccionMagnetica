@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 <article class="exercise" id="ejercicio-7">
   <div class="exercise-head">
     <span class="tag">Problema 7</span>
@@ -58,8 +61,7 @@
     </details>
   </div>
 
-  <form class="panel" method="get">
-    <input type="hidden" name="view" value="ex7">
+  <form class="panel" method="get" action="{{ url_for('exercise7') }}">
     <label>
       Radio R (m)
       <input name="ex7_radius_m" type="number" step="any" min="0.00001" required value="{{ data.ex7.radius_m }}">
@@ -75,3 +77,4 @@
     <button type="submit">Recalcular Parámetros</button>
   </form>
 </article>
+{% endblock %}
