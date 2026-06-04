@@ -1,54 +1,77 @@
 <article class="exercise" id="ejercicio-7">
   <div class="exercise-head">
-    <div>
-      <span class="tag">Problema 7</span>
-      <h2>Campo en el centro de una bobina circular delgada</h2>
-    </div>
-    <form class="panel" method="get">
-      <input type="hidden" name="view" value="ex7">
-      <label>Radio R (m)<input name="ex7_radius_m" type="number" step="any" value="{{ data.ex7.radius_m }}"></label>
-      <label>Corriente I (A)<input name="ex7_current" type="number" step="any" value="{{ data.ex7.current }}"></label>
-      <label>Campo B (T)<input name="ex7_field" type="number" step="any" value="{{ data.ex7.field }}"></label>
-      <button>Recalcular</button>
-    </form>
+    <span class="tag">Problema 7</span>
+    <h2>Campo en el centro de una bobina circular delgada</h2>
   </div>
 
+  <p class="section-heading">Enunciado</p>
   <p class="statement">
-    Determinar cuantas vueltas debe tener una bobina circular delgada de radio
-    0.1 m para que una corriente de 10 A produzca un campo magnetico de
+    Determinar cuántas vueltas debe tener una bobina circular delgada de radio
+    0.1 m para que una corriente de 10 A produzca un campo magnético de
     3 x 10^-3 T en su centro.
   </p>
 
   <div class="wiki-grid">
-    <section>
-      <h3>Conceptos</h3>
-      <p>
-        En el centro de una espira circular, el campo es proporcional a la
-        corriente. Si la bobina tiene N vueltas, cada vuelta aporta el mismo campo.
-      </p>
-    </section>
-    <section>
-      <h3>Formula</h3>
-      <p class="formula">B = N mu0 I / (2 R)</p>
-      <p>Despejando: <span class="formula small">N = 2 R B / (mu0 I)</span></p>
-    </section>
-    <section>
-      <h3>Unidades</h3>
-      <p class="units">m . T / ((T m / A) . A) = 1</p>
-      <p>El numero de vueltas no tiene unidad.</p>
-    </section>
-    <section>
-      <h3>Sustitucion</h3>
-      <ol class="steps">
-        <li>N = 2 . {{ data.ex7.radius_m }} m . {{ data.ex7.field }} T / (mu0 . {{ data.ex7.current }} A).</li>
-        <li>mu0 = 4 pi x 10^-7 T m/A.</li>
-        <li>Se simplifican T, m y A; queda una cantidad sin unidad.</li>
-      </ol>
-    </section>
-    <section class="result">
-      <h3>Resultado</h3>
-      <p>N = <strong>{{ "%.2f"|format(data.ex7.turns.turns) }} vueltas</strong></p>
-      <p>En la practica se redondea hacia arriba: <strong>{{ "%.0f"|format(data.ex7.turns.turns|round(0, 'ceil')) }} vueltas</strong></p>
-    </section>
+    <details open>
+      <summary><h3>Conceptos</h3></summary>
+      <div class="detail-content">
+        <p>
+          En el centro de una espira circular, el campo es proporcional a la
+          corriente. Si la bobina tiene N vueltas, cada vuelta aporta el mismo campo.
+        </p>
+      </div>
+    </details>
+    <details>
+      <summary><h3>Fórmula</h3></summary>
+      <div class="detail-content">
+        <p class="formula">B = N &mu;<sub>0</sub> I / (2 R)</p>
+        <p>Despejando: <span class="formula small">N = 2 R B / (&mu;<sub>0</sub> I)</span></p>
+      </div>
+    </details>
+    <details>
+      <summary><h3>Unidades</h3></summary>
+      <div class="detail-content">
+        <p class="units">m &middot; T / ((T m / A) &middot; A) = 1</p>
+        <p>El número de vueltas no tiene unidad.</p>
+      </div>
+    </details>
+    <details>
+      <summary><h3>Sustitución</h3></summary>
+      <div class="detail-content">
+        <ol class="steps">
+          <li>N = 2 &middot; {{ data.ex7.radius_m }} m &middot; {{ data.ex7.field }} T / (&mu;<sub>0</sub> &middot; {{ data.ex7.current }} A).</li>
+          <li>&mu;<sub>0</sub> = 4 &pi; x 10^-7 T m/A.</li>
+          <li>Se simplifican T, m y A; queda una cantidad sin unidad.</li>
+        </ol>
+      </div>
+    </details>
+    <details class="result">
+      <summary><h3>Resultado</h3></summary>
+      <div class="detail-content">
+        {% if data.ex7.turns %}
+          <p>N = <strong>{{ "%.2f"|format(data.ex7.turns.turns) }} vueltas</strong></p>
+          <p>En la práctica se redondea hacia arriba: <strong>{{ "%.0f"|format(data.ex7.turns.turns|round(0, 'ceil')) }} vueltas</strong></p>
+        {% else %}
+          <p>N = <strong class="text-error">No disponible (Error)</strong></p>
+        {% endif %}
+      </div>
+    </details>
   </div>
+
+  <form class="panel" method="get">
+    <input type="hidden" name="view" value="ex7">
+    <label>
+      Radio R (m)
+      <input name="ex7_radius_m" type="number" step="any" min="0.00001" required value="{{ data.ex7.radius_m }}">
+    </label>
+    <label>
+      Corriente I (A)
+      <input name="ex7_current" type="number" step="any" min="0.00001" required value="{{ data.ex7.current }}">
+    </label>
+    <label>
+      Campo B (T)
+      <input name="ex7_field" type="number" step="any" required value="{{ data.ex7.field }}">
+    </label>
+    <button type="submit">Recalcular Parámetros</button>
+  </form>
 </article>

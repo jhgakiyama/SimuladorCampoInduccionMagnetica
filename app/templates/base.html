@@ -3,36 +3,50 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Fisica 2 | Campo magnetico</title>
+    <title>Física 2 | Simulador de Campo Magnético</title>
+    <meta name="description" content="Simulador interactivo y guía didáctica de campo magnético e inducción para la cátedra de Física 2 de la Universidad Tecnológica Nacional (UTN FRRE).">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   </head>
   <body>
     <header class="topbar">
-      <div class="brand">
-        <img src="{{ url_for('static', filename='LOGO.png') }}" alt="Universidad Tecnologica Nacional Facultad Regional Resistencia">
-      </div>
-    </header>
-
-    <section class="title-band">
-      <div>
-        <p>Fisica 2</p>
-        <h1>Guia Didactica: Campo Magnetico e Induccion</h1>
-      </div>
-    </section>
-
-    <section class="problem-band">
-      <details class="problem-menu">
-        <summary><span class="hamburger" aria-hidden="true"></span>Menu</summary>
-        <nav aria-label="Menu">
-          <a class="{{ 'active' if data.active_view == 'home' else '' }}" href="{{ url_for('index', view='home') }}">Home</a>
+      <div class="topbar-container">
+        <div class="brand">
+          <img src="{{ url_for('static', filename='LOGO.png') }}" alt="Universidad Tecnológica Nacional - Regional Resistencia">
+        </div>
+        <nav class="nav-links" aria-label="Navegación Principal">
+          <a class="{{ 'active' if data.active_view == 'home' else '' }}" href="{{ url_for('index', view='home') }}">Inicio</a>
           <a class="{{ 'active' if data.active_view == 'ex1' else '' }}" href="{{ url_for('index', view='ex1') }}">Ejercicio 1</a>
           <a class="{{ 'active' if data.active_view == 'ex2' else '' }}" href="{{ url_for('index', view='ex2') }}">Ejercicio 2</a>
           <a class="{{ 'active' if data.active_view == 'ex7' else '' }}" href="{{ url_for('index', view='ex7') }}">Ejercicio 7</a>
         </nav>
-      </details>
+      </div>
+    </header>
+
+    <section class="title-band">
+      <div class="title-container">
+        <div class="title-text">
+          <p class="subtitle">FÍSICA II</p>
+          <h1>Guía Didáctica: Campo Magnético e Inducción</h1>
+        </div>
+        <div class="banner-pills">
+          <span class="pill"><span class="pill-icon">🧲</span> Electromagnetismo</span>
+          <span class="pill"><span class="pill-icon">⚡</span> Inducción</span>
+          <span class="pill"><span class="pill-icon">📐</span> Vectores</span>
+          <span class="pill"><span class="pill-icon">⚙️</span> UTN FRRE</span>
+        </div>
+      </div>
     </section>
 
-    <main>
+    <main class="main-content">
+      {% if data.error %}
+        <div class="error-alert" role="alert">
+          <div class="error-icon" aria-hidden="true">⚠️</div>
+          <div class="error-body">
+            <strong>Error de cálculo:</strong> {{ data.error }}
+          </div>
+        </div>
+      {% endif %}
+
       {% block content %}{% endblock %}
     </main>
   </body>

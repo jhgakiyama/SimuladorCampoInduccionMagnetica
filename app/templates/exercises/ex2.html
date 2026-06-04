@@ -1,21 +1,10 @@
 <article class="exercise" id="ejercicio-2">
   <div class="exercise-head">
-    <div>
-      <span class="tag">Problema 2</span>
-      <h2>Superposicion de dos conductores paralelos</h2>
-    </div>
-    <form class="panel" method="get">
-      <input type="hidden" name="view" value="ex2">
-      <label>Corriente I (A)<input name="ex2_current" type="number" step="any" value="{{ data.ex2.current }}"></label>
-      <label>Separacion d (cm)<input name="ex2_distance_cm" type="number" step="any" value="{{ data.ex2.distance_cm }}"></label>
-      <label>P1 x (cm)<input name="p1x" type="number" step="any" value="{{ data.ex2.form.p1x }}"></label>
-      <label>P1 y (cm)<input name="p1y" type="number" step="any" value="{{ data.ex2.form.p1y }}"></label>
-      <label>P2 x (cm)<input name="p2x" type="number" step="any" value="{{ data.ex2.form.p2x }}"></label>
-      <label>P2 y (cm)<input name="p2y" type="number" step="any" value="{{ data.ex2.form.p2y }}"></label>
-      <button>Recalcular</button>
-    </form>
+    <span class="tag">Problema 2</span>
+    <h2>Superposición de dos conductores paralelos</h2>
   </div>
 
+  <p class="section-heading">Enunciado</p>
   <p class="statement">
     Dos conductores filiformes paralelos separados d = 2 cm conducen corrientes
     iguales entrantes i = 1 A. Determinar B en P1(1, 1) y P2(1.5, 0), medidos en cm.
@@ -31,48 +20,91 @@
   </div>
 
   <div class="wiki-grid">
-    <section>
-      <h3>Conceptos</h3>
-      <p>
-        Se calcula el campo producido por cada conductor y despues se suman
-        vectorialmente sus componentes. Como las corrientes son entrantes, el
-        campo gira en sentido horario.
-      </p>
-    </section>
-    <section>
-      <h3>Formula vectorial usada</h3>
-      <p class="formula">B = mu0 I / (2 pi r)</p>
-      <p>
-        Para corriente entrante y vector desde el cable al punto
-        <span class="formula small">(dx, dy)</span>:
-      </p>
-      <p class="formula small">Bx = mu0 I dy / (2 pi r^2), By = -mu0 I dx / (2 pi r^2)</p>
-    </section>
-    <section>
-      <h3>Unidades</h3>
-      <p>Las coordenadas se pasan de cm a m: <span class="formula small">cm / 100 = m</span></p>
-      <p class="units">(T m / A) . A . m / m^2 = T</p>
-    </section>
-    <section>
-      <h3>Pasos practicos</h3>
-      <ol class="steps">
-        <li>Ubicar los cables en (0, 0) cm y (d, 0) cm.</li>
-        <li>Para cada punto, calcular dx, dy y r^2 respecto de cada cable.</li>
-        <li>Obtener Bx y By de cada cable con la regla de la mano derecha.</li>
-        <li>Sumar componentes: Btotal = B1 + B2.</li>
-      </ol>
-    </section>
-    <section>
-      <h3>Resultados</h3>
-      {% for item in data.ex2.points %}
-        <div class="vector-result">
-          <strong>P({{ item.point_cm[0] }}, {{ item.point_cm[1] }}) cm</strong>
-          <span>B1 = ({{ "%.3e"|format(item.wire_1.bx) }}, {{ "%.3e"|format(item.wire_1.by) }}) T</span>
-          <span>B2 = ({{ "%.3e"|format(item.wire_2.bx) }}, {{ "%.3e"|format(item.wire_2.by) }}) T</span>
-          <span>Total = ({{ "%.3e"|format(item.total.bx) }}, {{ "%.3e"|format(item.total.by) }}) T</span>
-          <span>|B| = {{ "%.3e"|format(item.total.magnitude) }} T</span>
-        </div>
-      {% endfor %}
-    </section>
+    <details open>
+      <summary><h3>Conceptos</h3></summary>
+      <div class="detail-content">
+        <p>
+          Se calcula el campo producido por cada conductor y después se suman
+          vectorialmente sus componentes. Como las corrientes son entrantes, el
+          campo gira en sentido horario.
+        </p>
+      </div>
+    </details>
+    <details>
+      <summary><h3>Fórmula vectorial usada</h3></summary>
+      <div class="detail-content">
+        <p class="formula">B = &mu;<sub>0</sub> I / (2 &pi; r)</p>
+        <p>
+          Para corriente entrante y vector desde el cable al punto
+          <span class="formula small">(dx, dy)</span>:
+        </p>
+        <p class="formula small">Bx = &mu;<sub>0</sub> I dy / (2 &pi; r^2), By = -&mu;<sub>0</sub> I dx / (2 &pi; r^2)</p>
+      </div>
+    </details>
+    <details>
+      <summary><h3>Unidades</h3></summary>
+      <div class="detail-content">
+        <p>Las coordenadas se pasan de cm a m: <span class="formula small">cm / 100 = m</span></p>
+        <p class="units">(T m / A) &middot; A &middot; m / m^2 = T</p>
+      </div>
+    </details>
+    <details>
+      <summary><h3>Pasos prácticos</h3></summary>
+      <div class="detail-content">
+        <ol class="steps">
+          <li>Ubicar los cables en (0, 0) cm y (d, 0) cm.</li>
+          <li>Para cada punto, calcular dx, dy y r^2 respecto de cada cable.</li>
+          <li>Obtener Bx y By de cada cable con la regla de la mano derecha.</li>
+          <li>Sumar componentes: Btotal = B1 + B2.</li>
+        </ol>
+      </div>
+    </details>
+    <details class="result">
+      <summary><h3>Resultados</h3></summary>
+      <div class="detail-content">
+        {% if data.ex2.points %}
+          {% for item in data.ex2.points %}
+            <div class="vector-result">
+              <strong>P({{ item.point_cm[0] }}, {{ item.point_cm[1] }}) cm</strong>
+              <span>B1 = ({{ "%.3e"|format(item.wire_1.bx) }}, {{ "%.3e"|format(item.wire_1.by) }}) T</span>
+              <span>B2 = ({{ "%.3e"|format(item.wire_2.bx) }}, {{ "%.3e"|format(item.wire_2.by) }}) T</span>
+              <span>Total = ({{ "%.3e"|format(item.total.bx) }}, {{ "%.3e"|format(item.total.by) }}) T</span>
+              <span>|B| = {{ "%.3e"|format(item.total.magnitude) }} T</span>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-error">No se pudieron realizar los cálculos debido a parámetros inválidos (ej. coincidencia de coordenadas).</p>
+        {% endif %}
+      </div>
+    </details>
   </div>
+
+  <form class="panel" method="get">
+    <input type="hidden" name="view" value="ex2">
+    <label>
+      Corriente I (A)
+      <input name="ex2_current" type="number" step="any" required value="{{ data.ex2.current }}">
+    </label>
+    <label>
+      Separación d (cm)
+      <input name="ex2_distance_cm" type="number" step="any" min="0.00001" required value="{{ data.ex2.distance_cm }}">
+    </label>
+    <label>
+      P1 x (cm)
+      <input name="p1x" type="number" step="any" required value="{{ data.ex2.form.p1x }}">
+    </label>
+    <label>
+      P1 y (cm)
+      <input name="p1y" type="number" step="any" required value="{{ data.ex2.form.p1y }}">
+    </label>
+    <label>
+      P2 x (cm)
+      <input name="p2x" type="number" step="any" required value="{{ data.ex2.form.p2x }}">
+    </label>
+    <label>
+      P2 y (cm)
+      <input name="p2y" type="number" step="any" required value="{{ data.ex2.form.p2y }}">
+    </label>
+    <button type="submit">Recalcular Parámetros</button>
+  </form>
 </article>
